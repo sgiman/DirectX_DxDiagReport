@@ -108,11 +108,11 @@ HRESULT CDxDiagInfo::Init( BOOL bAllowWHQLChecks )
         goto LCleanup;
     }
 
-	// Заполнить структуру DXDIAG_INIT_PARAMS и передать ее в IDxDiagContainer::Initialize
-	// Передача TRUE для bAllowWHQLCecks позволяет dxdiag проверять наличие драйверов.
-	// Цифровая подпись с логотипом WHQL, который может подключаться через Интернет для обновления
-	// WHQL-сертификатов.    
-	DXDIAG_INIT_PARAMS dxDiagInitParam;
+    // Заполнить структуру DXDIAG_INIT_PARAMS и передать ее в IDxDiagContainer::Initialize
+    // Передача TRUE для bAllowWHQLCecks позволяет dxdiag проверять наличие драйверов.
+    // Цифровая подпись с логотипом WHQL, который может подключаться через Интернет для обновления
+    // WHQL-сертификатов.    
+    DXDIAG_INIT_PARAMS dxDiagInitParam;
     ZeroMemory( &dxDiagInitParam, sizeof( DXDIAG_INIT_PARAMS ) );
 
     dxDiagInitParam.dwSize = sizeof( DXDIAG_INIT_PARAMS );
@@ -143,7 +143,7 @@ HRESULT CDxDiagInfo::QueryDxDiagViaDll()
     if( NULL == m_pDxDiagProvider )
         return E_INVALIDARG;
 
-	// Любой из них может выйти из строя, но если это произойдет, 
+    // Любой из них может выйти из строя, но если это произойдет, 
     // мы все ещё сможем обрабатывать другие
 
     GetSystemInfo( &m_pSysInfo );							// SystemInfo
@@ -171,7 +171,6 @@ HRESULT CDxDiagInfo::QueryDxDiagViaDll()
 
 
 
-
 //-----------------------------------------------------------------------------
 // Name: GetSystemInfo()
 // Desc: (2) Получить системную информацию из dll
@@ -192,7 +191,7 @@ HRESULT CDxDiagInfo::GetSystemInfo( SysInfo** ppSysInfo )
     ZeroMemory( pSysInfo, sizeof( SysInfo ) );
     *ppSysInfo = pSysInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_SystemInfo".
+    // Получить объект IDxDiagContainer с именем "DxDiag_SystemInfo".
     // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
     hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_SystemInfo", &pObject );
     if( FAILED( hr ) || pObject == NULL )
@@ -327,7 +326,7 @@ HRESULT CDxDiagInfo::GetSystemInfo( SysInfo** ppSysInfo )
     // Получить расширенный cpuid для аргументов с 0x80000008 по 0x80000018.
     // pSysInfo->m_ExtFuncBitmasks[0] будет содержать расширенную информацию о cpuid из arg 0x80000009
     // pSysInfo->m_ExtFuncBitmasks[15] будет содержать расширенную информацию о cpuid из arg 0x80000018
-	for( i = 0; i < 16; i++ )
+    for( i = 0; i < 16; i++ )
     {
         WCHAR strName[256];
         WCHAR strName2[256];
@@ -348,7 +347,7 @@ HRESULT CDxDiagInfo::GetSystemInfo( SysInfo** ppSysInfo )
     }
 
 #ifdef _DEBUG
-	// Проверка отладки, чтобы убедиться, что мы получили всю информацию от объекта.
+    // Проверка отладки, чтобы убедиться, что мы получили всю информацию от объекта.
     // Обычные клиенты не должны этого делать
     if( FAILED( hr = pObject->GetNumberOfProps( &pSysInfo->m_nElementCount ) ) )
         return hr;
@@ -380,7 +379,7 @@ HRESULT CDxDiagInfo::GetSystemDevices( vector <SystemDevice*>& vSystemDevices )
     if( NULL == m_pDxDiagProvider )
         return E_INVALIDARG;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_SystemDevices".
+    // Получить объект IDxDiagContainer с именем "DxDiag_SystemDevices".
     // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_SystemDevices", &pContainer ) ) )
         goto LCleanup;
@@ -454,7 +453,7 @@ HRESULT CDxDiagInfo::GetLogicalDiskInfo( vector <LogicalDisk*>& vLogicalDisks )
     if( NULL == m_pDxDiagProvider )
         return E_INVALIDARG;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_LogicalDisks".
+    // Получить объект IDxDiagContainer с именем "DxDiag_LogicalDisks".
     // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_LogicalDisks", &pContainer ) ) )
         goto LCleanup;
@@ -652,7 +651,7 @@ HRESULT CDxDiagInfo::GetDirectXFilesInfo( FileInfo** ppFileInfo )
     ZeroMemory( pFileInfo, sizeof( FileInfo ) );
     *ppFileInfo = pFileInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectXFiles".
+    // Получить объект IDxDiagContainer с именем "DxDiag_DirectXFiles".
     // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
     hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectXFiles", &pObject );
     if( FAILED( hr ) || pObject == NULL )
@@ -768,7 +767,7 @@ HRESULT CDxDiagInfo::GetDisplayInfo( vector <DisplayInfo*>& vDisplayInfo )
     DWORD nItem = 0;
     DWORD nCurCount = 0;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DisplayDevices".
+    // Получить объект IDxDiagContainer с именем "DxDiag_DisplayDevices".
     // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DisplayDevices", &pContainer ) ) )
         goto LCleanup;
@@ -1084,7 +1083,7 @@ HRESULT CDxDiagInfo::GetSoundInfo( vector <SoundInfo*>& vSoundInfos, vector <Sou
     DWORD nItem = 0;
     DWORD nCurCount = 0;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectSound.DxDiag_SoundDevices".
+    // Получить объект IDxDiagContainer с именем "DxDiag_DirectSound.DxDiag_SoundDevices".
     // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectSound.DxDiag_SoundDevices", &pContainer ) ) )
         goto LCleanup;
@@ -1380,7 +1379,7 @@ HRESULT CDxDiagInfo::GetMusicInfo( MusicInfo** ppMusicInfo )
     ZeroMemory( pMusicInfo, sizeof( MusicInfo ) );
     *ppMusicInfo = pMusicInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectMusic".
+    // Получить объект IDxDiagContainer с именем "DxDiag_DirectMusic".
     // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
     hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectMusic", &pObject );
     if( FAILED( hr ) || pObject == NULL )
@@ -2179,7 +2178,7 @@ HRESULT CDxDiagInfo::GetShowInfo( ShowInfo** ppShowInfo )
     ZeroMemory( pShowInfo, sizeof( ShowInfo ) );
     *ppShowInfo = pShowInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectShowFilters".
+    // Получить объект IDxDiagContainer с именем "DxDiag_DirectShowFilters".
     // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectShowFilters", &pContainer ) ) )
         goto LCleanup;
@@ -2363,7 +2362,7 @@ HRESULT CDxDiagInfo::GetInt64Value( IDxDiagContainer* pObject, WCHAR* wstrName, 
     if( FAILED( hr = pObject->GetProp( wstrName, &var ) ) )
         return hr;
 
-    // 64-bit values are stored as strings in BSTRs
+    // 64-битные значения хранятся в виде строк в BSTR.
     if( var.vt != VT_BSTR )
         return E_INVALIDARG;
 
