@@ -76,7 +76,6 @@ VOID AddExpandedString( HWND hwndList, TCHAR* szKey, TCHAR* szName, TCHAR* szVal
 
 
 
-
 //**********************************************************************************
 // Name: WinMain()
 // Описание: Точка входа в приложение. Поскольку мы используем простой диалог для
@@ -200,9 +199,9 @@ VOID SetupListBox( HWND hDlg )
     ListView_InsertColumn( hwndList, iSubItem, &col );
     iSubItem++;
 
-	// Добавляем фальшивый столбец, чтобы SetColumnWidth, 
-	// выравнял список по столбцам 
-	col.fmt = LVCFMT_RIGHT;
+    // Добавляем фальшивый столбец, чтобы SetColumnWidth, 
+    // выравнял список по столбцам 
+    col.fmt = LVCFMT_RIGHT;
     col.pszText = TEXT( "" );
     col.iSubItem = iSubItem;
     ListView_InsertColumn( hwndList, iSubItem, &col );
@@ -372,7 +371,7 @@ VOID FillListBoxWithLogicalDiskInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pLogicalDisk->m_dwHardDriveIndex );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
         // Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pLogicalDisk->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pLogicalDisk displayed\n") );
@@ -435,8 +434,8 @@ VOID FillListBoxWithSystemDevices( HWND hwndList )
         ADD_STRING_LINE_MACRO( szName, pSystemDevice->m_szDeviceID );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pSystemDevice->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pSystemDevice displayed\n") );
 #endif
@@ -494,8 +493,8 @@ VOID FillListBoxWithDirectXFilesInfo( HWND hwndList )
     ADD_EXPANDED_STRING_LINE_MACRO( szKey, pFileInfo->m_szDXFileNotesEnglish );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+     // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+     // Вам не нужно беспокоиться об этом. Это только для проверки.
      if( nElementCount != pFileInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pFileInfo displayed\n") );
 #endif
@@ -525,8 +524,8 @@ VOID FillListBoxWithDirectXFilesInfo( HWND hwndList )
         ADD_INT_LINE_MACRO( szName, pFileNode->m_bProblem );
 
 #ifdef _DEBUG
-		 // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		 // Вам не нужно беспокоиться об этом. Это только для проверки.
+	 // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	 // Вам не нужно беспокоиться об этом. Это только для проверки.
          if( nElementCount != pFileNode->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pFileNode displayed\n") );
 #endif
@@ -625,8 +624,8 @@ VOID FillListBoxWithDisplayInfo( HWND hwndList )
         ADD_STRING_LINE_MACRO( szName, pDisplayInfo->m_szTestResultD3D9English );
 
 #ifdef _DEBUG
-		 // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		 // Вам не нужно беспокоиться об этом. Это только для проверки.
+	 // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	 // Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pDisplayInfo->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pDisplayInfo displayed\n") );
 #endif
@@ -747,8 +746,8 @@ VOID FillListBoxWithSoundInfo( HWND hwndList )
         ADD_STRING_LINE_MACRO( szName, pSoundInfo->m_szTestResultEnglish );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pSoundInfo->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pSoundInfo displayed\n") );
 #endif
@@ -783,8 +782,8 @@ VOID FillListBoxWithSoundInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pSoundCaptureInfo->m_dwFormats );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pSoundCaptureInfo->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pSoundCaptureInfo displayed\n") );
 #endif
@@ -821,8 +820,8 @@ VOID FillListBoxWithMusicInfo( HWND hwndList )
     ADD_STRING_LINE_MACRO( szKey, pMusicInfo->m_szTestResultEnglish );
 
 #ifdef _DEBUG
-	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-	// Вам не нужно беспокоиться об этом. Это только для проверки.
+    // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+    // Вам не нужно беспокоиться об этом. Это только для проверки.
     if( nElementCount != pMusicInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pMusicInfo displayed\n") );
 #endif
@@ -879,8 +878,8 @@ VOID FillListBoxWithInputInfo( HWND hwndList )
     ADD_STRING_LINE_MACRO( szKey, pInputInfo->m_szRegHelpText );
 
 #ifdef _DEBUG
-	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-	// Вам не нужно беспокоиться об этом. Это только для проверки.
+    // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+    // Вам не нужно беспокоиться об этом. Это только для проверки.
     if( nElementCount != pInputInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pInputInfo displayed\n") );
 #endif
@@ -906,8 +905,8 @@ VOID FillListBoxWithInputInfo( HWND hwndList )
         ADD_INT_LINE_MACRO( szName, pInputDevice->m_lFFDriverSize );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pInputDevice->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pInputDevice displayed\n") );
 #endif
@@ -950,8 +949,8 @@ VOID FillListBoxWithInputRelatedInfo( HWND hwndList, vector <InputRelatedDeviceI
         ADD_STRING_LINE_MACRO( szName, pInputRelatedDevice->m_szFlags2 );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pInputRelatedDevice->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pInputRelatedDevice displayed\n") );
 #endif
@@ -1021,8 +1020,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
     ADD_STRING_LINE_MACRO( szKey, pNetInfo->m_szVoiceWizardMicTestEnglish );
 
 #ifdef _DEBUG
-	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-	// Вам не нужно беспокоиться об этом. Это только для проверки.
+    // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+    // Вам не нужно беспокоиться об этом. Это только для проверки.
     if( nElementCount != pNetInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pNetInfo displayed\n") );
 #endif
@@ -1052,8 +1051,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pNetApp->m_dwDXVer );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pNetApp->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pNetApp displayed\n") );
 #endif
@@ -1082,8 +1081,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pNetSP->m_dwDXVer );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pNetSP->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pNetSP displayed\n") );
 #endif
@@ -1108,8 +1107,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pNetAdapter->m_dwFlags );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pNetAdapter->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pNetAdapter displayed\n") );
 #endif
@@ -1131,8 +1130,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pNetVoiceCodec->m_dwMaxBitsPerSecond );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pNetVoiceCodec->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pNetVoiceCodec displayed\n") );
 #endif
@@ -1173,8 +1172,8 @@ VOID FillListBoxWithDirectShowInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pShowFilterInfo->m_dwMerit );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
+	// Вам не нужно беспокоиться об этом. Это только для проверки.
         if( nElementCount != pShowFilterInfo->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pShowFilterInfo displayed\n") );
 #endif
