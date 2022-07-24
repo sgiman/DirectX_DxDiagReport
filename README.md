@@ -1,4 +1,5 @@
-# DxDiagReport
+# DxDiagReport (windows)
+
  ### Sample app to read info from dxdiagn.dll
 
 The DxDiagReport sample shows how to use the DxDiag COM interface by the instantiating a known set child container by name
