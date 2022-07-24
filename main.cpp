@@ -1,7 +1,7 @@
 //*****************************************************************************
 // File: main.cpp (x86/x64)
 //
-// Desc: Пример app для чтения информации из dxdiagn.dll
+// Desc: РџСЂРёРјРµСЂ app РґР»СЏ С‡С‚РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё РёР· dxdiagn.dll
 //
 // Copyright (c) Microsoft Corp. All rights reserved.
 //
@@ -14,7 +14,7 @@
 
 #include <windows.h>
 #include <tchar.h>
-#pragma warning( disable : 4996 ) // отключить устаревшее предупреждение
+#pragma warning( disable : 4996 ) // РѕС‚РєР»СЋС‡РёС‚СЊ СѓСЃС‚Р°СЂРµРІС€РµРµ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ
 #include <strsafe.h>
 #pragma warning( default : 4996 )
 #pragma warning(disable:4005)
@@ -79,13 +79,13 @@ VOID AddExpandedString( HWND hwndList, TCHAR* szKey, TCHAR* szName, TCHAR* szVal
 
 //**********************************************************************************
 // Name: WinMain()
-// Описание: Точка входа в приложение. Поскольку мы используем простой диалог для
-//           взаимодействие с пользователем нам не нужно перекачивать сообщения.
+// РћРїРёСЃР°РЅРёРµ: РўРѕС‡РєР° РІС…РѕРґР° РІ РїСЂРёР»РѕР¶РµРЅРёРµ. РџРѕСЃРєРѕР»СЊРєСѓ РјС‹ РёСЃРїРѕР»СЊР·СѓРµРј РїСЂРѕСЃС‚РѕР№ РґРёР°Р»РѕРі РґР»СЏ
+//           РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РЅР°Рј РЅРµ РЅСѓР¶РЅРѕ РїРµСЂРµРєР°С‡РёРІР°С‚СЊ СЃРѕРѕР±С‰РµРЅРёСЏ.
 //**********************************************************************************
 INT WINAPI WinMain( HINSTANCE hinstance, HINSTANCE hPrevInstance,
                     LPSTR lpCmdLine, INT nCmdShow )
 {
-    // Включить проверку памяти во время выполнения для отладочных сборок.
+    // Р’РєР»СЋС‡РёС‚СЊ РїСЂРѕРІРµСЂРєСѓ РїР°РјСЏС‚Рё РІРѕ РІСЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ РґР»СЏ РѕС‚Р»Р°РґРѕС‡РЅС‹С… СЃР±РѕСЂРѕРє.
 #if defined(DEBUG) | defined(_DEBUG)
     _CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
@@ -118,7 +118,7 @@ INT WINAPI WinMain( HINSTANCE hinstance, HINSTANCE hPrevInstance,
         return 0;
     }
 
-    // Показать диалог и заполнить его информацией из dxdiagn.dll
+    // РџРѕРєР°Р·Р°С‚СЊ РґРёР°Р»РѕРі Рё Р·Р°РїРѕР»РЅРёС‚СЊ РµРіРѕ РёРЅС„РѕСЂРјР°С†РёРµР№ РёР· dxdiagn.dll
     DialogBox( hinstance, MAKEINTRESOURCE( IDD_MAIN ), NULL,
                ( DLGPROC )MainDlgProc );
 
@@ -131,7 +131,7 @@ INT WINAPI WinMain( HINSTANCE hinstance, HINSTANCE hPrevInstance,
 
 //-----------------------------------------------------------------------------
 // Name: MainDlgProc()
-// Desc: Обрабатывает диалоговые сообщения
+// Desc: РћР±СЂР°Р±Р°С‚С‹РІР°РµС‚ РґРёР°Р»РѕРіРѕРІС‹Рµ СЃРѕРѕР±С‰РµРЅРёСЏ
 //-----------------------------------------------------------------------------
 INT_PTR CALLBACK MainDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam )
 {
@@ -163,14 +163,14 @@ INT_PTR CALLBACK MainDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam 
         }
     }
 
-    return FALSE; // Не обработал сообщение
+    return FALSE; // РќРµ РѕР±СЂР°Р±РѕС‚Р°Р» СЃРѕРѕР±С‰РµРЅРёРµ
 }
 
 
 
 //-----------------------------------------------------------------------------
 // Name: SetupListBox()
-// Desc: (0) Сформровать списоок паметров (Setup)
+// Desc: (0) РЎС„РѕСЂРјСЂРѕРІР°С‚СЊ СЃРїРёСЃРѕРѕРє РїР°РјРµС‚СЂРѕРІ (Setup)
 //-----------------------------------------------------------------------------
 VOID SetupListBox( HWND hDlg )
 {
@@ -200,8 +200,8 @@ VOID SetupListBox( HWND hDlg )
     ListView_InsertColumn( hwndList, iSubItem, &col );
     iSubItem++;
 
-	// Добавляем фальшивый столбец, чтобы SetColumnWidth, 
-	// выравнял список по столбцам 
+	// Р”РѕР±Р°РІР»СЏРµРј С„Р°Р»СЊС€РёРІС‹Р№ СЃС‚РѕР»Р±РµС†, С‡С‚РѕР±С‹ SetColumnWidth, 
+	// РІС‹СЂР°РІРЅСЏР» СЃРїРёСЃРѕРє РїРѕ СЃС‚РѕР»Р±С†Р°Рј 
 	col.fmt = LVCFMT_RIGHT;
     col.pszText = TEXT( "" );
     col.iSubItem = iSubItem;
@@ -213,7 +213,7 @@ VOID SetupListBox( HWND hDlg )
 
 //-----------------------------------------------------------------------------
 // Name: FillListBox()
-// Desc: (1) Заполнить окно со списком (ListBox)  
+// Desc: (1) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј (ListBox)  
 //-----------------------------------------------------------------------------
 VOID FillListBox( HWND hDlg )
 {
@@ -230,7 +230,7 @@ VOID FillListBox( HWND hDlg )
     FillListBoxWithDirectXFilesInfo( hwndList );
     FillListBoxWithDirectShowInfo( hwndList );
 
-    // Авторазмер всех столбцов, чтобы они точно соответствовали заголовку/тексту:
+    // РђРІС‚РѕСЂР°Р·РјРµСЂ РІСЃРµС… СЃС‚РѕР»Р±С†РѕРІ, С‡С‚РѕР±С‹ РѕРЅРё С‚РѕС‡РЅРѕ СЃРѕРѕС‚РІРµС‚СЃС‚РІРѕРІР°Р»Рё Р·Р°РіРѕР»РѕРІРєСѓ/С‚РµРєСЃС‚Сѓ:
     INT iColumn = 0;
     INT iWidthHeader;
     INT iWidthText;
@@ -245,7 +245,7 @@ VOID FillListBox( HWND hDlg )
             ListView_SetColumnWidth( hwndList, iColumn, iWidthHeader );
         iColumn++;
     }
-    // Удалить фиктивный столбец, который был создан
+    // РЈРґР°Р»РёС‚СЊ С„РёРєС‚РёРІРЅС‹Р№ СЃС‚РѕР»Р±РµС†, РєРѕС‚РѕСЂС‹Р№ Р±С‹Р» СЃРѕР·РґР°РЅ
     ListView_DeleteColumn( hwndList, iColumn - 1 );
 
 }
@@ -254,7 +254,7 @@ VOID FillListBox( HWND hDlg )
 
 //-----------------------------------------------------------------------------
 // Name: FillListBoxWithSysInfo()
-// Desc: (2) Заполнить окно со списком системной информацией (sysInfo)
+// Desc: (2) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј СЃРёСЃС‚РµРјРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРµР№ (sysInfo)
 //-----------------------------------------------------------------------------
 VOID FillListBoxWithSysInfo( HWND hwndList )
 {
@@ -334,8 +334,8 @@ VOID FillListBoxWithSysInfo( HWND hwndList )
     }
 
 #ifdef _DEBUG
-	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-    // Вам не нужно беспокоиться об этом. Это только для проверки.
+	// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+    // Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
     if( nElementCount != pSysInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pSysInfo displayed\n") );
 #endif
@@ -345,7 +345,7 @@ VOID FillListBoxWithSysInfo( HWND hwndList )
 
 //-----------------------------------------------------------------------------------------
 // Name: FillListBoxWithLogicalDiskInfo()
-// Desc: (4) Заполнить окно со списком информацией о логических дисках (LogicalDiskInfo) 
+// Desc: (4) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ Р»РѕРіРёС‡РµСЃРєРёС… РґРёСЃРєР°С… (LogicalDiskInfo) 
 //-----------------------------------------------------------------------------------------
 VOID FillListBoxWithLogicalDiskInfo( HWND hwndList )
 {
@@ -372,8 +372,8 @@ VOID FillListBoxWithLogicalDiskInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pLogicalDisk->m_dwHardDriveIndex );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-        // Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+        // Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pLogicalDisk->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pLogicalDisk displayed\n") );
 #endif
@@ -413,7 +413,7 @@ VOID FillListBoxWithLogicalDiskInfo( HWND hwndList )
 
 //------------------------------------------------------------------------------------------
 // Name: FillListBoxWithSystemDevices()
-// Desc: (5) Заполнить окно со списком информацией о системных утройствах (SystemDevices) 
+// Desc: (5) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ СЃРёСЃС‚РµРјРЅС‹С… СѓС‚СЂРѕР№СЃС‚РІР°С… (SystemDevices) 
 //------------------------------------------------------------------------------------------
 VOID FillListBoxWithSystemDevices( HWND hwndList )
 {
@@ -435,8 +435,8 @@ VOID FillListBoxWithSystemDevices( HWND hwndList )
         ADD_STRING_LINE_MACRO( szName, pSystemDevice->m_szDeviceID );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pSystemDevice->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pSystemDevice displayed\n") );
 #endif
@@ -475,7 +475,7 @@ VOID FillListBoxWithSystemDevices( HWND hwndList )
 
 //---------------------------------------------------------------------------------------
 // Name: FillListBoxWithDirectXFilesInfo()
-// Desc: (6) Заполнить окно со списком информацией о DirexctX файлах (DirectXFilesInfo) 
+// Desc: (6) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ DirexctX С„Р°Р№Р»Р°С… (DirectXFilesInfo) 
 //---------------------------------------------------------------------------------------
 VOID FillListBoxWithDirectXFilesInfo( HWND hwndList )
 {
@@ -494,8 +494,8 @@ VOID FillListBoxWithDirectXFilesInfo( HWND hwndList )
     ADD_EXPANDED_STRING_LINE_MACRO( szKey, pFileInfo->m_szDXFileNotesEnglish );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
      if( nElementCount != pFileInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pFileInfo displayed\n") );
 #endif
@@ -525,8 +525,8 @@ VOID FillListBoxWithDirectXFilesInfo( HWND hwndList )
         ADD_INT_LINE_MACRO( szName, pFileNode->m_bProblem );
 
 #ifdef _DEBUG
-		 // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		 // Вам не нужно беспокоиться об этом. Это только для проверки.
+		 // РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		 // Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
          if( nElementCount != pFileNode->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pFileNode displayed\n") );
 #endif
@@ -536,7 +536,7 @@ VOID FillListBoxWithDirectXFilesInfo( HWND hwndList )
 
 //-----------------------------------------------------------------------------
 // Name: FillListBoxWithDisplayInfo()
-// Desc: (7) Заполнить окно со списком информацией о Дисплеях (DisplayInfo) 
+// Desc: (7) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ Р”РёСЃРїР»РµСЏС… (DisplayInfo) 
 //-----------------------------------------------------------------------------
 VOID FillListBoxWithDisplayInfo( HWND hwndList )
 {
@@ -625,8 +625,8 @@ VOID FillListBoxWithDisplayInfo( HWND hwndList )
         ADD_STRING_LINE_MACRO( szName, pDisplayInfo->m_szTestResultD3D9English );
 
 #ifdef _DEBUG
-		 // Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		 // Вам не нужно беспокоиться об этом. Это только для проверки.
+		 // РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		 // Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pDisplayInfo->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pDisplayInfo displayed\n") );
 #endif
@@ -638,7 +638,7 @@ VOID FillListBoxWithDisplayInfo( HWND hwndList )
 
 //-----------------------------------------------------------------------------
 // Name: FillListBoxWithDXVAInfo()
-// Desc: (8) Заполнить окно со списком информацией о DXVA (DXVAInfo) 
+// Desc: (8) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ DXVA (DXVAInfo) 
 //-----------------------------------------------------------------------------
 VOID FillListBoxWithDXVAInfo( TCHAR* szParentName, HWND hwndList, vector <DxDiag_DXVA_DeinterlaceCaps*>& vDXVACaps )
 {
@@ -669,7 +669,7 @@ VOID FillListBoxWithDXVAInfo( TCHAR* szParentName, HWND hwndList, vector <DxDiag
 
 //-----------------------------------------------------------------------------
 // Name: FillListBoxWithSoundInfo()
-// Desc: (9) Заполнить окно со списком информацией о звуке (SoundInfo) 
+// Desc: (9) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ Р·РІСѓРєРµ (SoundInfo) 
 //-----------------------------------------------------------------------------
 VOID FillListBoxWithSoundInfo( HWND hwndList )
 {
@@ -747,8 +747,8 @@ VOID FillListBoxWithSoundInfo( HWND hwndList )
         ADD_STRING_LINE_MACRO( szName, pSoundInfo->m_szTestResultEnglish );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pSoundInfo->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pSoundInfo displayed\n") );
 #endif
@@ -783,8 +783,8 @@ VOID FillListBoxWithSoundInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pSoundCaptureInfo->m_dwFormats );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pSoundCaptureInfo->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pSoundCaptureInfo displayed\n") );
 #endif
@@ -795,7 +795,7 @@ VOID FillListBoxWithSoundInfo( HWND hwndList )
 
 //-----------------------------------------------------------------------------
 // Name: FillListBoxWithMusicInfo()
-// Desc: (10) Заполнить окно со списком информацией о музыке (MusicInfo) 
+// Desc: (10) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ РјСѓР·С‹РєРµ (MusicInfo) 
 //-----------------------------------------------------------------------------
 VOID FillListBoxWithMusicInfo( HWND hwndList )
 {
@@ -821,8 +821,8 @@ VOID FillListBoxWithMusicInfo( HWND hwndList )
     ADD_STRING_LINE_MACRO( szKey, pMusicInfo->m_szTestResultEnglish );
 
 #ifdef _DEBUG
-	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-	// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+	// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
     if( nElementCount != pMusicInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pMusicInfo displayed\n") );
 #endif
@@ -859,7 +859,7 @@ VOID FillListBoxWithMusicInfo( HWND hwndList )
 
 //-----------------------------------------------------------------------------
 // Name: FillListBoxWithInputInfo()
-// Desc: (11) Заполнить окно со списком информацией о вводе (InputInfo) 
+// Desc: (11) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ РІРІРѕРґРµ (InputInfo) 
 //-----------------------------------------------------------------------------
 VOID FillListBoxWithInputInfo( HWND hwndList )
 {
@@ -879,8 +879,8 @@ VOID FillListBoxWithInputInfo( HWND hwndList )
     ADD_STRING_LINE_MACRO( szKey, pInputInfo->m_szRegHelpText );
 
 #ifdef _DEBUG
-	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-	// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+	// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
     if( nElementCount != pInputInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pInputInfo displayed\n") );
 #endif
@@ -906,8 +906,8 @@ VOID FillListBoxWithInputInfo( HWND hwndList )
         ADD_INT_LINE_MACRO( szName, pInputDevice->m_lFFDriverSize );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pInputDevice->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pInputDevice displayed\n") );
 #endif
@@ -921,7 +921,7 @@ VOID FillListBoxWithInputInfo( HWND hwndList )
 
 //--------------------------------------------------------------------------------------------
 // Name: FillListBoxWithInputRelatedInfo()
-// Desc: (12) Заполнить окно со списком о вводе отностительной информации (InputRelatedInfo) 
+// Desc: (12) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј Рѕ РІРІРѕРґРµ РѕС‚РЅРѕСЃС‚РёС‚РµР»СЊРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё (InputRelatedInfo) 
 //--------------------------------------------------------------------------------------------
 VOID FillListBoxWithInputRelatedInfo( HWND hwndList, vector <InputRelatedDeviceInfo*>& vDeviceList )
 {
@@ -950,8 +950,8 @@ VOID FillListBoxWithInputRelatedInfo( HWND hwndList, vector <InputRelatedDeviceI
         ADD_STRING_LINE_MACRO( szName, pInputRelatedDevice->m_szFlags2 );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pInputRelatedDevice->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pInputRelatedDevice displayed\n") );
 #endif
@@ -994,7 +994,7 @@ VOID FillListBoxWithInputRelatedInfo( HWND hwndList, vector <InputRelatedDeviceI
 
 //-------------------------------------------------------------------------------
 // Name: FillListBoxWithNetworkInfo()
-// Desc: (13) Заполнить окно со списком о сетевоой информации (InputRelatedInfo) 
+// Desc: (13) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј Рѕ СЃРµС‚РµРІРѕРѕР№ РёРЅС„РѕСЂРјР°С†РёРё (InputRelatedInfo) 
 //--------------------------------------------------------------------------------
 VOID FillListBoxWithNetworkInfo( HWND hwndList )
 {
@@ -1021,8 +1021,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
     ADD_STRING_LINE_MACRO( szKey, pNetInfo->m_szVoiceWizardMicTestEnglish );
 
 #ifdef _DEBUG
-	// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-	// Вам не нужно беспокоиться об этом. Это только для проверки.
+	// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+	// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
     if( nElementCount != pNetInfo->m_nElementCount )
         OutputDebugString( TEXT("**WARNING** -- not all elements from pNetInfo displayed\n") );
 #endif
@@ -1052,8 +1052,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pNetApp->m_dwDXVer );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pNetApp->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pNetApp displayed\n") );
 #endif
@@ -1082,8 +1082,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pNetSP->m_dwDXVer );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pNetSP->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pNetSP displayed\n") );
 #endif
@@ -1108,8 +1108,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pNetAdapter->m_dwFlags );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pNetAdapter->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pNetAdapter displayed\n") );
 #endif
@@ -1131,8 +1131,8 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pNetVoiceCodec->m_dwMaxBitsPerSecond );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pNetVoiceCodec->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pNetVoiceCodec displayed\n") );
 #endif
@@ -1142,7 +1142,7 @@ VOID FillListBoxWithNetworkInfo( HWND hwndList )
 
 //-----------------------------------------------------------------------------
 // Name: FillListBoxWithDirectShowInfo()
-// Desc: (14) Заполнить окно со списком о Direct_Show_Info (DirectShowInfo) 
+// Desc: (14) Р—Р°РїРѕР»РЅРёС‚СЊ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј Рѕ Direct_Show_Info (DirectShowInfo) 
 //-----------------------------------------------------------------------------
 VOID FillListBoxWithDirectShowInfo( HWND hwndList )
 {
@@ -1173,8 +1173,8 @@ VOID FillListBoxWithDirectShowInfo( HWND hwndList )
         ADD_UINT_LINE_MACRO( szName, pShowFilterInfo->m_dwMerit );
 
 #ifdef _DEBUG
-		// Отладочная проверка, чтобы убедиться, что мы отображаем всю информацию об объекте.
-		// Вам не нужно беспокоиться об этом. Это только для проверки.
+		// РћС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРј РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ.
+		// Р’Р°Рј РЅРµ РЅСѓР¶РЅРѕ Р±РµСЃРїРѕРєРѕРёС‚СЊСЃСЏ РѕР± СЌС‚РѕРј. Р­С‚Рѕ С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё.
         if( nElementCount != pShowFilterInfo->m_nElementCount )
             OutputDebugString( TEXT("**WARNING** -- not all elements from pShowFilterInfo displayed\n") );
 #endif
@@ -1184,7 +1184,7 @@ VOID FillListBoxWithDirectShowInfo( HWND hwndList )
 
 //-----------------------------------------------------------------------------
 // Name: AddString()
-// Desc: добавить строку 
+// Desc: РґРѕР±Р°РІРёС‚СЊ СЃС‚СЂРѕРєСѓ 
 //-----------------------------------------------------------------------------
 VOID AddString( HWND hwndList, TCHAR* szKey, TCHAR* szName, TCHAR* szValue )
 {
@@ -1215,7 +1215,7 @@ VOID AddString( HWND hwndList, TCHAR* szKey, TCHAR* szName, TCHAR* szValue )
 
 //-----------------------------------------------------------------------------
 // Name: AddExpandedString()
-// Desc: добавить расширенную строку
+// Desc: РґРѕР±Р°РІРёС‚СЊ СЂР°СЃС€РёСЂРµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 //-----------------------------------------------------------------------------
 VOID AddExpandedString( HWND hwndList, TCHAR* szKey, TCHAR* szName, TCHAR* szValue )
 {
@@ -1241,10 +1241,10 @@ VOID AddExpandedString( HWND hwndList, TCHAR* szKey, TCHAR* szName, TCHAR* szVal
 
         AddString( hwndList, szKey, szName, pCurrent );
 
-        // Продолжить для следующего
+        // РџСЂРѕРґРѕР»Р¶РёС‚СЊ РґР»СЏ СЃР»РµРґСѓСЋС‰РµРіРѕ
         pCurrent = pStartOfNext;
 
-        // Искать конец следующего и останавить, если больше нет
+        // РСЃРєР°С‚СЊ РєРѕРЅРµС† СЃР»РµРґСѓСЋС‰РµРіРѕ Рё РѕСЃС‚Р°РЅР°РІРёС‚СЊ, РµСЃР»Рё Р±РѕР»СЊС€Рµ РЅРµС‚
         pEndOfLine = _tcschr( pStartOfNext, TEXT( '\r' ) );
         if( pEndOfLine == NULL )
             break;

@@ -1,7 +1,7 @@
 //********************************************************************************
 // File: dxdiaginfo.cpp (x86/x64)
 //
-// Desc: Пример app для чтения информации из dxdiagn.dll
+// Desc: РџСЂРёРјРµСЂ app РґР»СЏ С‡С‚РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё РёР· dxdiagn.dll
 //
 // Copyright (c) Microsoft Corp. All rights reserved.
 //
@@ -30,7 +30,7 @@ using namespace std;
 
 
 //-----------------------------------------------------------------------------
-// Определения и константы
+// РћРїСЂРµРґРµР»РµРЅРёСЏ Рё РєРѕРЅСЃС‚Р°РЅС‚С‹
 //-----------------------------------------------------------------------------
 #define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=NULL; } }
 #define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=NULL; } }
@@ -42,7 +42,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 // Name: CDxDiagInfo()
-// Desc: К о н с т р у к т о р 
+// Desc: Рљ Рѕ РЅ СЃ С‚ СЂ Сѓ Рє С‚ Рѕ СЂ 
 //-----------------------------------------------------------------------------
 CDxDiagInfo::CDxDiagInfo()
 {
@@ -60,7 +60,7 @@ CDxDiagInfo::CDxDiagInfo()
 
 //-----------------------------------------------------------------------------
 // Name: ~CDxDiagInfo()
-// Desc: Д е с т р у к т о р (освободить память)
+// Desc: Р” Рµ СЃ С‚ СЂ Сѓ Рє С‚ Рѕ СЂ (РѕСЃРІРѕР±РѕРґРёС‚СЊ РїР°РјСЏС‚СЊ)
 //-----------------------------------------------------------------------------
 CDxDiagInfo::~CDxDiagInfo()
 {
@@ -86,7 +86,7 @@ CDxDiagInfo::~CDxDiagInfo()
 
 //-----------------------------------------------------------------------------
 // Name: Init()
-// Desc: (0) Подключиться к dxdiagn.dll и запустить его.
+// Desc: (0) РџРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє dxdiagn.dll Рё Р·Р°РїСѓСЃС‚РёС‚СЊ РµРіРѕ.
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::Init( BOOL bAllowWHQLChecks )
 {
@@ -108,10 +108,10 @@ HRESULT CDxDiagInfo::Init( BOOL bAllowWHQLChecks )
         goto LCleanup;
     }
 
-	// Заполнить структуру DXDIAG_INIT_PARAMS и передать ее в IDxDiagContainer::Initialize
-	// Передача TRUE для bAllowWHQLCecks позволяет dxdiag проверять наличие драйверов.
-	// Цифровая подпись с логотипом WHQL, который может подключаться через Интернет для обновления
-	// WHQL-сертификатов.    
+	// Р—Р°РїРѕР»РЅРёС‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ DXDIAG_INIT_PARAMS Рё РїРµСЂРµРґР°С‚СЊ РµРµ РІ IDxDiagContainer::Initialize
+	// РџРµСЂРµРґР°С‡Р° TRUE РґР»СЏ bAllowWHQLCecks РїРѕР·РІРѕР»СЏРµС‚ dxdiag РїСЂРѕРІРµСЂСЏС‚СЊ РЅР°Р»РёС‡РёРµ РґСЂР°Р№РІРµСЂРѕРІ.
+	// Р¦РёС„СЂРѕРІР°СЏ РїРѕРґРїРёСЃСЊ СЃ Р»РѕРіРѕС‚РёРїРѕРј WHQL, РєРѕС‚РѕСЂС‹Р№ РјРѕР¶РµС‚ РїРѕРґРєР»СЋС‡Р°С‚СЊСЃСЏ С‡РµСЂРµР· РРЅС‚РµСЂРЅРµС‚ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ
+	// WHQL-СЃРµСЂС‚РёС„РёРєР°С‚РѕРІ.    
 	DXDIAG_INIT_PARAMS dxDiagInitParam;
     ZeroMemory( &dxDiagInitParam, sizeof( DXDIAG_INIT_PARAMS ) );
 
@@ -136,15 +136,15 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: QueryDxDiagViaDll()
-// Desc: (1) Запросите dxdiagn.dll для получения всей информации.
+// Desc: (1) Р—Р°РїСЂРѕСЃРёС‚Рµ dxdiagn.dll РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РІСЃРµР№ РёРЅС„РѕСЂРјР°С†РёРё.
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::QueryDxDiagViaDll()
 {
     if( NULL == m_pDxDiagProvider )
         return E_INVALIDARG;
 
-	// Любой из них может выйти из строя, но если это произойдет, 
-    // мы все ещё сможем обрабатывать другие
+	// Р›СЋР±РѕР№ РёР· РЅРёС… РјРѕР¶РµС‚ РІС‹Р№С‚Рё РёР· СЃС‚СЂРѕСЏ, РЅРѕ РµСЃР»Рё СЌС‚Рѕ РїСЂРѕРёР·РѕР№РґРµС‚, 
+    // РјС‹ РІСЃРµ РµС‰С‘ СЃРјРѕР¶РµРј РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РґСЂСѓРіРёРµ
 
     GetSystemInfo( &m_pSysInfo );							// SystemInfo
 
@@ -174,7 +174,7 @@ HRESULT CDxDiagInfo::QueryDxDiagViaDll()
 
 //-----------------------------------------------------------------------------
 // Name: GetSystemInfo()
-// Desc: (2) Получить системную информацию из dll
+// Desc: (2) РџРѕР»СѓС‡РёС‚СЊ СЃРёСЃС‚РµРјРЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetSystemInfo( SysInfo** ppSysInfo )
 {
@@ -192,8 +192,8 @@ HRESULT CDxDiagInfo::GetSystemInfo( SysInfo** ppSysInfo )
     ZeroMemory( pSysInfo, sizeof( SysInfo ) );
     *ppSysInfo = pSysInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_SystemInfo".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_SystemInfo".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
     hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_SystemInfo", &pObject );
     if( FAILED( hr ) || pObject == NULL )
     {
@@ -324,9 +324,9 @@ HRESULT CDxDiagInfo::GetSystemInfo( SysInfo** ppSysInfo )
     if( FAILED( hr = GetStringValue( pObject, L"szTimeEnglish", EXPAND(pSysInfo->m_szTimeEnglish) ) ) )
         goto LCleanup; nCurCount++;
 
-    // Получить расширенный cpuid для аргументов с 0x80000008 по 0x80000018.
-    // pSysInfo->m_ExtFuncBitmasks[0] будет содержать расширенную информацию о cpuid из arg 0x80000009
-    // pSysInfo->m_ExtFuncBitmasks[15] будет содержать расширенную информацию о cpuid из arg 0x80000018
+    // РџРѕР»СѓС‡РёС‚СЊ СЂР°СЃС€РёСЂРµРЅРЅС‹Р№ cpuid РґР»СЏ Р°СЂРіСѓРјРµРЅС‚РѕРІ СЃ 0x80000008 РїРѕ 0x80000018.
+    // pSysInfo->m_ExtFuncBitmasks[0] Р±СѓРґРµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ СЂР°СЃС€РёСЂРµРЅРЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ cpuid РёР· arg 0x80000009
+    // pSysInfo->m_ExtFuncBitmasks[15] Р±СѓРґРµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ СЂР°СЃС€РёСЂРµРЅРЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ cpuid РёР· arg 0x80000018
 	for( i = 0; i < 16; i++ )
     {
         WCHAR strName[256];
@@ -348,8 +348,8 @@ HRESULT CDxDiagInfo::GetSystemInfo( SysInfo** ppSysInfo )
     }
 
 #ifdef _DEBUG
-	// Проверка отладки, чтобы убедиться, что мы получили всю информацию от объекта.
-    // Обычные клиенты не должны этого делать
+	// РџСЂРѕРІРµСЂРєР° РѕС‚Р»Р°РґРєРё, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°.
+    // РћР±С‹С‡РЅС‹Рµ РєР»РёРµРЅС‚С‹ РЅРµ РґРѕР»Р¶РЅС‹ СЌС‚РѕРіРѕ РґРµР»Р°С‚СЊ
     if( FAILED( hr = pObject->GetNumberOfProps( &pSysInfo->m_nElementCount ) ) )
         return hr;
     if( pSysInfo->m_nElementCount != nCurCount )
@@ -365,7 +365,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetSystemDevices()
-// Desc: (3) Получить информацию о системных устройствах из dll
+// Desc: (3) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЃРёСЃС‚РµРјРЅС‹С… СѓСЃС‚СЂРѕР№СЃС‚РІР°С… РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetSystemDevices( vector <SystemDevice*>& vSystemDevices )
 {
@@ -380,8 +380,8 @@ HRESULT CDxDiagInfo::GetSystemDevices( vector <SystemDevice*>& vSystemDevices )
     if( NULL == m_pDxDiagProvider )
         return E_INVALIDARG;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_SystemDevices".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_SystemDevices".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_SystemDevices", &pContainer ) ) )
         goto LCleanup;
     if( FAILED( hr = pContainer->GetNumberOfChildContainers( &nInstanceCount ) ) )
@@ -396,7 +396,7 @@ HRESULT CDxDiagInfo::GetSystemDevices( vector <SystemDevice*>& vSystemDevices )
             return E_OUTOFMEMORY;
         ZeroMemory( pSystemDevice, sizeof( SystemDevice ) );
 
-        // Добавьте pSystemDevice в vSystemDevices
+        // Р”РѕР±Р°РІСЊС‚Рµ pSystemDevice РІ vSystemDevices
         vSystemDevices.push_back( pSystemDevice );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -419,7 +419,7 @@ HRESULT CDxDiagInfo::GetSystemDevices( vector <SystemDevice*>& vSystemDevices )
             goto LCleanup;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pSystemDevice->m_nElementCount ) ) )
             return hr;
         if( pSystemDevice->m_nElementCount != nCurCount )
@@ -439,7 +439,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetLogicalDiskInfo()
-// Desc: (4) Получить информацию о логическом диске из dll
+// Desc: (4) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р»РѕРіРёС‡РµСЃРєРѕРј РґРёСЃРєРµ РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetLogicalDiskInfo( vector <LogicalDisk*>& vLogicalDisks )
 {
@@ -454,8 +454,8 @@ HRESULT CDxDiagInfo::GetLogicalDiskInfo( vector <LogicalDisk*>& vLogicalDisks )
     if( NULL == m_pDxDiagProvider )
         return E_INVALIDARG;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_LogicalDisks".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_LogicalDisks".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_LogicalDisks", &pContainer ) ) )
         goto LCleanup;
     if( FAILED( hr = pContainer->GetNumberOfChildContainers( &nInstanceCount ) ) )
@@ -470,7 +470,7 @@ HRESULT CDxDiagInfo::GetLogicalDiskInfo( vector <LogicalDisk*>& vLogicalDisks )
             return E_OUTOFMEMORY;
         ZeroMemory( pLogicalDisk, sizeof( LogicalDisk ) );
 
-        // Добавить pLogicalDisk в vLogicalDisks
+        // Р”РѕР±Р°РІРёС‚СЊ pLogicalDisk РІ vLogicalDisks
         vLogicalDisks.push_back( pLogicalDisk );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -503,7 +503,7 @@ HRESULT CDxDiagInfo::GetLogicalDiskInfo( vector <LogicalDisk*>& vLogicalDisks )
             goto LCleanup;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pLogicalDisk->m_nElementCount ) ) )
             return hr;
         if( pLogicalDisk->m_nElementCount != nCurCount )
@@ -523,7 +523,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GatherSystemDeviceDriverList()
-// Desc: (5) Получить информацию о системных устройствах из dll
+// Desc: (5) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЃРёСЃС‚РµРјРЅС‹С… СѓСЃС‚СЂРѕР№СЃС‚РІР°С… РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GatherSystemDeviceDriverList( IDxDiagContainer* pParent, vector <FileNode*>& vDriverList )
 {
@@ -579,7 +579,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GatherFileNodeInst()
-// Desc: (6) Сбор файла узла Inst
+// Desc: (6) РЎР±РѕСЂ С„Р°Р№Р»Р° СѓР·Р»Р° Inst
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GatherFileNodeInst( FileNode* pFileNode, IDxDiagContainer* pObject )
 {
@@ -620,7 +620,7 @@ HRESULT CDxDiagInfo::GatherFileNodeInst( FileNode* pFileNode, IDxDiagContainer* 
         goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-    // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+    // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
     if( FAILED( hr = pObject->GetNumberOfProps( &pFileNode->m_nElementCount ) ) )
         goto LCleanup;
     if( pFileNode->m_nElementCount != nCurCount )
@@ -634,7 +634,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetDirectXFilesInfo()
-// Desc: (7) Получить информацию о файле DirectX из dll
+// Desc: (7) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С„Р°Р№Р»Рµ DirectX РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetDirectXFilesInfo( FileInfo** ppFileInfo )
 {
@@ -652,8 +652,8 @@ HRESULT CDxDiagInfo::GetDirectXFilesInfo( FileInfo** ppFileInfo )
     ZeroMemory( pFileInfo, sizeof( FileInfo ) );
     *ppFileInfo = pFileInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectXFiles".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_DirectXFiles".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
     hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectXFiles", &pObject );
     if( FAILED( hr ) || pObject == NULL )
     {
@@ -667,7 +667,7 @@ HRESULT CDxDiagInfo::GetDirectXFilesInfo( FileInfo** ppFileInfo )
         goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-    // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+    // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
     if( FAILED( hr = pObject->GetNumberOfProps( &pFileInfo->m_nElementCount ) ) )
         return hr;
     if( pFileInfo->m_nElementCount != nCurCount )
@@ -690,7 +690,7 @@ HRESULT CDxDiagInfo::GetDirectXFilesInfo( FileInfo** ppFileInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pFileNode, sizeof( FileNode ) );
 
-        // Добавьте pFileNode в pFileInfo->m_vDxComponentsFiles
+        // Р”РѕР±Р°РІСЊС‚Рµ pFileNode РІ pFileInfo->m_vDxComponentsFiles
         pFileInfo->m_vDxComponentsFiles.push_back( pFileNode );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -736,7 +736,7 @@ HRESULT CDxDiagInfo::GetDirectXFilesInfo( FileInfo** ppFileInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pFileNode->m_nElementCount ) ) )
             return hr;
         if( pFileNode->m_nElementCount != nCurCount )
@@ -756,7 +756,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetDisplayInfo()
-// Desc: (8) Получить информацию об отображении из dll
+// Desc: (8) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕС‚РѕР±СЂР°Р¶РµРЅРёРё РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetDisplayInfo( vector <DisplayInfo*>& vDisplayInfo )
 {
@@ -768,8 +768,8 @@ HRESULT CDxDiagInfo::GetDisplayInfo( vector <DisplayInfo*>& vDisplayInfo )
     DWORD nItem = 0;
     DWORD nCurCount = 0;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DisplayDevices".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_DisplayDevices".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DisplayDevices", &pContainer ) ) )
         goto LCleanup;
     if( FAILED( hr = pContainer->GetNumberOfChildContainers( &nInstanceCount ) ) )
@@ -784,7 +784,7 @@ HRESULT CDxDiagInfo::GetDisplayInfo( vector <DisplayInfo*>& vDisplayInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pDisplayInfo, sizeof( DisplayInfo ) );
 
-        // Добавьте pDisplayInfo в vDisplayInfo
+        // Р”РѕР±Р°РІСЊС‚Рµ pDisplayInfo РІ vDisplayInfo
         vDisplayInfo.push_back( pDisplayInfo );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -972,7 +972,7 @@ HRESULT CDxDiagInfo::GetDisplayInfo( vector <DisplayInfo*>& vDisplayInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pDisplayInfo->m_nElementCount ) ) )
             return hr;
         if( pDisplayInfo->m_nElementCount != nCurCount )
@@ -1020,7 +1020,7 @@ HRESULT CDxDiagInfo::GatherDXVA_DeinterlaceCaps( IDxDiagContainer* pParent,
         if( pDXVANode == NULL )
             return E_OUTOFMEMORY;
 
-        // Добавить pDXVANode в vDXVACaps
+        // Р”РѕР±Р°РІРёС‚СЊ pDXVANode РІ vDXVACaps
         vDXVACaps.push_back( pDXVANode );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -1051,7 +1051,7 @@ HRESULT CDxDiagInfo::GatherDXVA_DeinterlaceCaps( IDxDiagContainer* pParent,
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pDXVANode->m_nElementCount ) ) )
             goto LCleanup;
         if( pDXVANode->m_nElementCount != nCurCount )
@@ -1072,7 +1072,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetSoundInfo()
-// Desc: (10) Получить информацию о звуке из dll
+// Desc: (10) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р·РІСѓРєРµ РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetSoundInfo( vector <SoundInfo*>& vSoundInfos, vector <SoundCaptureInfo*>& vSoundCaptureInfos )
 {
@@ -1084,8 +1084,8 @@ HRESULT CDxDiagInfo::GetSoundInfo( vector <SoundInfo*>& vSoundInfos, vector <Sou
     DWORD nItem = 0;
     DWORD nCurCount = 0;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectSound.DxDiag_SoundDevices".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_DirectSound.DxDiag_SoundDevices".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectSound.DxDiag_SoundDevices", &pContainer ) ) )
         goto LCleanup;
     if( FAILED( hr = pContainer->GetNumberOfChildContainers( &nInstanceCount ) ) )
@@ -1100,7 +1100,7 @@ HRESULT CDxDiagInfo::GetSoundInfo( vector <SoundInfo*>& vSoundInfos, vector <Sou
             return E_OUTOFMEMORY;
         ZeroMemory( pSoundInfo, sizeof( SoundInfo ) );
 
-        // Добавить pSoundInfo в vSoundInfos
+        // Р”РѕР±Р°РІРёС‚СЊ pSoundInfo РІ vSoundInfos
         vSoundInfos.push_back( pSoundInfo );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -1254,7 +1254,7 @@ HRESULT CDxDiagInfo::GetSoundInfo( vector <SoundInfo*>& vSoundInfos, vector <Sou
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pSoundInfo->m_nElementCount ) ) )
             return hr;
         if( pSoundInfo->m_nElementCount != nCurCount )
@@ -1266,7 +1266,7 @@ HRESULT CDxDiagInfo::GetSoundInfo( vector <SoundInfo*>& vSoundInfos, vector <Sou
 
     SAFE_RELEASE( pContainer );
 
-    // Получите объект IDxDiagContainer с именем «DxDiag_DirectSound.DxDiag_SoundCaptureDevices».
+    // РџРѕР»СѓС‡РёС‚Рµ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј В«DxDiag_DirectSound.DxDiag_SoundCaptureDevicesВ».
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectSound.DxDiag_SoundCaptureDevices",
                                                        &pContainer ) ) )
         goto LCleanup;
@@ -1282,7 +1282,7 @@ HRESULT CDxDiagInfo::GetSoundInfo( vector <SoundInfo*>& vSoundInfos, vector <Sou
             return E_OUTOFMEMORY;
         ZeroMemory( pSoundCaptureInfo, sizeof( SoundCaptureInfo ) );
 
-        // Добавить pSoundCaptureInfo в vSoundCaptureInfos
+        // Р”РѕР±Р°РІРёС‚СЊ pSoundCaptureInfo РІ vSoundCaptureInfos
         vSoundCaptureInfos.push_back( pSoundCaptureInfo );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -1341,7 +1341,7 @@ HRESULT CDxDiagInfo::GetSoundInfo( vector <SoundInfo*>& vSoundInfos, vector <Sou
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pSoundCaptureInfo->m_nElementCount ) ) )
             return hr;
         if( pSoundCaptureInfo->m_nElementCount != nCurCount )
@@ -1361,7 +1361,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetMusicInfo()
-// Desc: (11) Получить информацию о музыке из dll
+// Desc: (11) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РјСѓР·С‹РєРµ РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetMusicInfo( MusicInfo** ppMusicInfo )
 {
@@ -1380,8 +1380,8 @@ HRESULT CDxDiagInfo::GetMusicInfo( MusicInfo** ppMusicInfo )
     ZeroMemory( pMusicInfo, sizeof( MusicInfo ) );
     *ppMusicInfo = pMusicInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectMusic".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_DirectMusic".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
     hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectMusic", &pObject );
     if( FAILED( hr ) || pObject == NULL )
     {
@@ -1412,7 +1412,7 @@ HRESULT CDxDiagInfo::GetMusicInfo( MusicInfo** ppMusicInfo )
         goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-    // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+    // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
     if( FAILED( hr = pObject->GetNumberOfProps( &pMusicInfo->m_nElementCount ) ) )
         return hr;
     if( pMusicInfo->m_nElementCount != nCurCount )
@@ -1421,7 +1421,7 @@ HRESULT CDxDiagInfo::GetMusicInfo( MusicInfo** ppMusicInfo )
 
     SAFE_RELEASE( pObject );
 
-    // Получить количество объектов «DxDiag_DirectMusic.DxDiag_DirectMusicPorts» в dll
+    // РџРѕР»СѓС‡РёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЉРµРєС‚РѕРІ В«DxDiag_DirectMusic.DxDiag_DirectMusicPortsВ» РІ dll
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectMusic.DxDiag_DirectMusicPorts", &pContainer ) ) )
         goto LCleanup;
     if( FAILED( hr = pContainer->GetNumberOfChildContainers( &nInstanceCount ) ) )
@@ -1436,7 +1436,7 @@ HRESULT CDxDiagInfo::GetMusicInfo( MusicInfo** ppMusicInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pMusicPort, sizeof( MusicPort ) );
 
-        // Добавить pMusicPort в pMusicInfo->m_vMusicPorts
+        // Р”РѕР±Р°РІРёС‚СЊ pMusicPort РІ pMusicInfo->m_vMusicPorts
         pMusicInfo->m_vMusicPorts.push_back( pMusicPort );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -1472,7 +1472,7 @@ HRESULT CDxDiagInfo::GetMusicInfo( MusicInfo** ppMusicInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pMusicPort->m_nElementCount ) ) )
             return hr;
         if( pMusicPort->m_nElementCount != nCurCount )
@@ -1492,7 +1492,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetInputInfo()
-// Desc: (12) Получить информацию для утсройств ввода из dll
+// Desc: (12) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ РґР»СЏ СѓС‚СЃСЂРѕР№СЃС‚РІ РІРІРѕРґР° РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetInputInfo( InputInfo** ppInputInfo )
 {
@@ -1512,8 +1512,8 @@ HRESULT CDxDiagInfo::GetInputInfo( InputInfo** ppInputInfo )
     ZeroMemory( pInputInfo, sizeof( InputInfo ) );
     *ppInputInfo = pInputInfo;
 
-    // Получить объект IDxDiagContainer с именем "DxDiag_DirectInput".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+    // РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_DirectInput".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
 	hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectInput", &pObject );
     if( FAILED( hr ) || pObject == NULL )
     {
@@ -1531,7 +1531,7 @@ HRESULT CDxDiagInfo::GetInputInfo( InputInfo** ppInputInfo )
         return hr; nCurCount++;
 
 #ifdef _DEBUG
-    // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+    // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
     if( FAILED( hr = pObject->GetNumberOfProps( &pInputInfo->m_nElementCount ) ) )
         return hr;
     if( pInputInfo->m_nElementCount != nCurCount )
@@ -1540,7 +1540,7 @@ HRESULT CDxDiagInfo::GetInputInfo( InputInfo** ppInputInfo )
 
     SAFE_RELEASE( pObject );
 
-    // Получить количество объектов «DxDiag_DirectInput.DxDiag_DirectInputDevices» в dll
+    // РџРѕР»СѓС‡РёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЉРµРєС‚РѕРІ В«DxDiag_DirectInput.DxDiag_DirectInputDevicesВ» РІ dll
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectInput.DxDiag_DirectInputDevices",
                                                        &pContainer ) ) )
         goto LCleanup;
@@ -1556,7 +1556,7 @@ HRESULT CDxDiagInfo::GetInputInfo( InputInfo** ppInputInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pInputDevice, sizeof( InputDeviceInfo ) );
 
-        // Добавить pInputDevice в pInputInfo->m_vDirectInputDevices
+        // Р”РѕР±Р°РІРёС‚СЊ pInputDevice РІ pInputInfo->m_vDirectInputDevices
         pInputInfo->m_vDirectInputDevices.push_back( pInputDevice );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -1593,7 +1593,7 @@ HRESULT CDxDiagInfo::GetInputInfo( InputInfo** ppInputInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pInputDevice->m_nElementCount ) ) )
             return hr;
         if( pInputDevice->m_nElementCount != nCurCount )
@@ -1632,7 +1632,7 @@ HRESULT CDxDiagInfo::GetInputInfo( InputInfo** ppInputInfo )
     }
     SAFE_RELEASE( pContainer );
 
-    // Получить дерево "DxDiag_DirectInput.DxDiag_DirectInputUSBRoot"
+    // РџРѕР»СѓС‡РёС‚СЊ РґРµСЂРµРІРѕ "DxDiag_DirectInput.DxDiag_DirectInputUSBRoot"
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectInput.DxDiag_DirectInputUSBRoot",
                                                        &pContainer ) ) )
         goto LCleanup;
@@ -1659,7 +1659,7 @@ HRESULT CDxDiagInfo::GetInputInfo( InputInfo** ppInputInfo )
     }
     SAFE_RELEASE( pContainer );
 
-    // Получить дерево "DxDiag_DirectInput.DxDiag_DirectInputPS2Devices"
+    // РџРѕР»СѓС‡РёС‚СЊ РґРµСЂРµРІРѕ "DxDiag_DirectInput.DxDiag_DirectInputPS2Devices"
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectInput.DxDiag_DirectInputPS2Devices",
                                                        &pContainer ) ) )
         goto LCleanup;
@@ -1697,7 +1697,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GatherInputRelatedDeviceInst()
-// Desc: (13) Получить дерево InputRelatedDeviceInfo из dll
+// Desc: (13) РџРѕР»СѓС‡РёС‚СЊ РґРµСЂРµРІРѕ InputRelatedDeviceInfo РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GatherInputRelatedDeviceInst( InputRelatedDeviceInfo* pInputRelatedDevice,
                                                    IDxDiagContainer* pContainer )
@@ -1736,7 +1736,7 @@ HRESULT CDxDiagInfo::GatherInputRelatedDeviceInst( InputRelatedDeviceInfo* pInpu
         goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-    // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+    // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
     if( FAILED( hr = pContainer->GetNumberOfProps( &pInputRelatedDevice->m_nElementCount ) ) )
         goto LCleanup;
     if( pInputRelatedDevice->m_nElementCount != nCurCount )
@@ -1791,7 +1791,7 @@ LCleanup:
 
 //----------------------------------------------------------------------------------
 // Name: GatherInputRelatedDeviceInstDrivers()
-// Desc: (14) Получите список драйверов и сохраните его в узле InputRelatedDeviceInfo.
+// Desc: (14) РџРѕР»СѓС‡РёС‚Рµ СЃРїРёСЃРѕРє РґСЂР°Р№РІРµСЂРѕРІ Рё СЃРѕС…СЂР°РЅРёС‚Рµ РµРіРѕ РІ СѓР·Р»Рµ InputRelatedDeviceInfo.
 //----------------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GatherInputRelatedDeviceInstDrivers( InputRelatedDeviceInfo* pInputRelatedDevice,
                                                           IDxDiagContainer* pChild )
@@ -1839,7 +1839,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetNetworkInfo()
-// Desc: (15) Получить информацию о сети из dll
+// Desc: (15) РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЃРµС‚Рё РёР· dll
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
 {
@@ -1858,8 +1858,8 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
     ZeroMemory( pNetInfo, sizeof( NetInfo ) );
     *ppNetInfo = pNetInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectPlay".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_DirectPlay".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
 	hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectPlay", &pObject );
     if( FAILED( hr ) || pObject == NULL )
     {
@@ -1897,7 +1897,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
         goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-    // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+    // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
     if( FAILED( hr = pObject->GetNumberOfProps( &pNetInfo->m_nElementCount ) ) )
         return hr;
     if( pNetInfo->m_nElementCount != nCurCount )
@@ -1906,7 +1906,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
 
     SAFE_RELEASE( pObject );
 
-    // Получить количество объектов «DxDiag_DirectPlay.DxDiag_DirectPlayApps» в dll
+    // РџРѕР»СѓС‡РёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЉРµРєС‚РѕРІ В«DxDiag_DirectPlay.DxDiag_DirectPlayAppsВ» РІ dll
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectPlay.DxDiag_DirectPlayApps", &pContainer ) ) )
         goto LCleanup;
     if( FAILED( hr = pContainer->GetNumberOfChildContainers( &nInstanceCount ) ) )
@@ -1921,7 +1921,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pNetApp, sizeof( NetApp ) );
 
-        // Добавить pNetApp в pNetInfo->m_vNetApps
+        // Р”РѕР±Р°РІРёС‚СЊ pNetApp РІ pNetInfo->m_vNetApps
         pNetInfo->m_vNetApps.push_back( pNetApp );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -1967,7 +1967,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pNetApp->m_nElementCount ) ) )
             return hr;
         if( pNetApp->m_nElementCount != nCurCount )
@@ -1979,7 +1979,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
 
     SAFE_RELEASE( pContainer );
 
-    // Получить количество объектов "DxDiag_DirectPlaySP" в dll
+    // РџРѕР»СѓС‡РёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЉРµРєС‚РѕРІ "DxDiag_DirectPlaySP" РІ dll
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectPlay.DxDiag_DirectPlaySPs", &pContainer ) ) )
         goto LCleanup;
     if( FAILED( hr = pContainer->GetNumberOfChildContainers( &nInstanceCount ) ) )
@@ -1994,7 +1994,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pNetSP, sizeof( NetSP ) );
 
-        // Добавить pNetSP в pNetInfo->m_vNetSPs
+        // Р”РѕР±Р°РІРёС‚СЊ pNetSP РІ pNetInfo->m_vNetSPs
         pNetInfo->m_vNetSPs.push_back( pNetSP );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -2034,7 +2034,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pNetSP->m_nElementCount ) ) )
             return hr;
         if( pNetSP->m_nElementCount != nCurCount )
@@ -2061,7 +2061,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pNetAdapter, sizeof( NetAdapter ) );
 
-        // Добавить pNetAdapter в m_pNetInfo->m_vNetAdapters.
+        // Р”РѕР±Р°РІРёС‚СЊ pNetAdapter РІ m_pNetInfo->m_vNetAdapters.
         m_pNetInfo->m_vNetAdapters.push_back( pNetAdapter );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -2087,7 +2087,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pNetAdapter->m_nElementCount ) ) )
             return hr;
         if( pNetAdapter->m_nElementCount != nCurCount )
@@ -2114,7 +2114,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pNetVoiceCodec, sizeof( NetVoiceCodec ) );
 
-        // Добавить pNetVoiceCodec в m_pNetInfo->m_vNetVoiceCodecs
+        // Р”РѕР±Р°РІРёС‚СЊ pNetVoiceCodec РІ m_pNetInfo->m_vNetVoiceCodecs
         m_pNetInfo->m_vNetVoiceCodecs.push_back( pNetVoiceCodec );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -2140,7 +2140,7 @@ HRESULT CDxDiagInfo::GetNetworkInfo( NetInfo** ppNetInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pNetVoiceCodec->m_nElementCount ) ) )
             return hr;
         if( pNetVoiceCodec->m_nElementCount != nCurCount )
@@ -2160,7 +2160,7 @@ LCleanup:
 
 //-----------------------------------------------------------------------------
 // Name: GetShowInfo()
-// Desc: Получить информацию о выводе списка   
+// Desc: РџРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РІС‹РІРѕРґРµ СЃРїРёСЃРєР°   
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetShowInfo( ShowInfo** ppShowInfo )
 {
@@ -2179,8 +2179,8 @@ HRESULT CDxDiagInfo::GetShowInfo( ShowInfo** ppShowInfo )
     ZeroMemory( pShowInfo, sizeof( ShowInfo ) );
     *ppShowInfo = pShowInfo;
 
-	// Получить объект IDxDiagContainer с именем "DxDiag_DirectShowFilters".
-    // Этот вызов может занять некоторое время, пока dxdiag собирает информацию.
+	// РџРѕР»СѓС‡РёС‚СЊ РѕР±СЉРµРєС‚ IDxDiagContainer СЃ РёРјРµРЅРµРј "DxDiag_DirectShowFilters".
+    // Р­С‚РѕС‚ РІС‹Р·РѕРІ РјРѕР¶РµС‚ Р·Р°РЅСЏС‚СЊ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ, РїРѕРєР° dxdiag СЃРѕР±РёСЂР°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ.
     if( FAILED( hr = m_pDxDiagRoot->GetChildContainer( L"DxDiag_DirectShowFilters", &pContainer ) ) )
         goto LCleanup;
     if( FAILED( hr = pContainer->GetNumberOfChildContainers( &nInstanceCount ) ) )
@@ -2195,7 +2195,7 @@ HRESULT CDxDiagInfo::GetShowInfo( ShowInfo** ppShowInfo )
             return E_OUTOFMEMORY;
         ZeroMemory( pShowFilter, sizeof( ShowFilterInfo ) );
 
-        // Добавить pShowFilter в pShowInfo->m_vShowFilters.
+        // Р”РѕР±Р°РІРёС‚СЊ pShowFilter РІ pShowInfo->m_vShowFilters.
         pShowInfo->m_vShowFilters.push_back( pShowFilter );
 
         hr = pContainer->EnumChildContainerNames( nItem, wszContainer, 256 );
@@ -2231,7 +2231,7 @@ HRESULT CDxDiagInfo::GetShowInfo( ShowInfo** ppShowInfo )
             goto LCleanup; nCurCount++;
 
 #ifdef _DEBUG
-        // отладочная проверка, чтобы убедиться, что мы получили всю информацию от объекта
+        // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РјС‹ РїРѕР»СѓС‡РёР»Рё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕС‚ РѕР±СЉРµРєС‚Р°
         if( FAILED( hr = pObject->GetNumberOfProps( &pShowFilter->m_nElementCount ) ) )
             return hr;
         if( pShowFilter->m_nElementCount != nCurCount )
@@ -2251,7 +2251,7 @@ LCleanup:
 
 //----------------------------------------------------------------------
 // Name: GetStringValue()
-// Desc: Получить строковое значение из объекта IDxDiagContainer
+// Desc: РџРѕР»СѓС‡РёС‚СЊ СЃС‚СЂРѕРєРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РёР· РѕР±СЉРµРєС‚Р° IDxDiagContainer
 //----------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetStringValue( IDxDiagContainer* pObject, WCHAR* wstrName, TCHAR* strValue, int nStrLen )
 {
@@ -2280,7 +2280,7 @@ HRESULT CDxDiagInfo::GetStringValue( IDxDiagContainer* pObject, WCHAR* wstrName,
 
 //-----------------------------------------------------------------
 // Name: GetUIntValue()
-// Desc: Получить значение UINT из объекта IDxDiagContainer
+// Desc: РџРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёРµ UINT РёР· РѕР±СЉРµРєС‚Р° IDxDiagContainer
 //-----------------------------------------------------------------
 HRESULT CDxDiagInfo::GetUIntValue( IDxDiagContainer* pObject, WCHAR* wstrName, DWORD* pdwValue )
 {
@@ -2304,7 +2304,7 @@ HRESULT CDxDiagInfo::GetUIntValue( IDxDiagContainer* pObject, WCHAR* wstrName, D
 
 //-----------------------------------------------------------------------------
 // Name: GetIntValue()
-// Desc: Получить значение INT из объекта IDxDiagContainer
+// Desc: РџРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёРµ INT РёР· РѕР±СЉРµРєС‚Р° IDxDiagContainer
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetIntValue( IDxDiagContainer* pObject, WCHAR* wstrName, LONG* pnValue )
 {
@@ -2328,7 +2328,7 @@ HRESULT CDxDiagInfo::GetIntValue( IDxDiagContainer* pObject, WCHAR* wstrName, LO
 
 //------------------------------------------------------------
 // Name: GetBoolValue()
-// Desc: Получить значение BOOL из объекта IDxDiagContainer
+// Desc: РџРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёРµ BOOL РёР· РѕР±СЉРµРєС‚Р° IDxDiagContainer
 //------------------------------------------------------------
 HRESULT CDxDiagInfo::GetBoolValue( IDxDiagContainer* pObject, WCHAR* wstrName, BOOL* pbValue )
 {
@@ -2352,7 +2352,7 @@ HRESULT CDxDiagInfo::GetBoolValue( IDxDiagContainer* pObject, WCHAR* wstrName, B
 
 //-----------------------------------------------------------------------------
 // Name: GetInt64Value()
-// Desc: Получите значение ULONGLONG из объекта IDxDiagContainer.
+// Desc: РџРѕР»СѓС‡РёС‚Рµ Р·РЅР°С‡РµРЅРёРµ ULONGLONG РёР· РѕР±СЉРµРєС‚Р° IDxDiagContainer.
 //-----------------------------------------------------------------------------
 HRESULT CDxDiagInfo::GetInt64Value( IDxDiagContainer* pObject, WCHAR* wstrName, ULONGLONG* pullValue )
 {
@@ -2377,7 +2377,7 @@ HRESULT CDxDiagInfo::GetInt64Value( IDxDiagContainer* pObject, WCHAR* wstrName, 
 
 //-----------------------------------------------------------------------------
 // Name: DestroySystemDevice()
-// Desc: Удалить системное устройство
+// Desc: РЈРґР°Р»РёС‚СЊ СЃРёСЃС‚РµРјРЅРѕРµ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroySystemDevice( vector <SystemDevice*>& vSystemDevices )
 {
@@ -2395,7 +2395,7 @@ VOID CDxDiagInfo::DestroySystemDevice( vector <SystemDevice*>& vSystemDevices )
 
 //-----------------------------------------------------------------------------
 // Name: DestroyFileList()
-// Desc: Очистить список файлов 
+// Desc: РћС‡РёСЃС‚РёС‚СЊ СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ 
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroyFileList( FileInfo* pFileInfo )
 {
@@ -2418,7 +2418,7 @@ VOID CDxDiagInfo::DestroyFileList( FileInfo* pFileInfo )
 
 //-----------------------------------------------------------------------------
 // Name: DestroyDisplayInfo()
-// Desc: Очистить информацию на дисплее
+// Desc: РћС‡РёСЃС‚РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ РЅР° РґРёСЃРїР»РµРµ
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroyDisplayInfo( vector <DisplayInfo*>& vDisplayInfo )
 {
@@ -2446,7 +2446,7 @@ VOID CDxDiagInfo::DestroyDisplayInfo( vector <DisplayInfo*>& vDisplayInfo )
 
 //-----------------------------------------------------------------------------
 // Name: DestroyInputInfo()
-// Desc: Очистка входной информации
+// Desc: РћС‡РёСЃС‚РєР° РІС…РѕРґРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroyInputInfo( InputInfo* pInputInfo )
 {
@@ -2474,7 +2474,7 @@ VOID CDxDiagInfo::DestroyInputInfo( InputInfo* pInputInfo )
 
 //-----------------------------------------------------------------------------
 // Name: DeleteInputTree
-// Desc: Удалить дерево ввода
+// Desc: РЈРґР°Р»РёС‚СЊ РґРµСЂРµРІРѕ РІРІРѕРґР°
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DeleteInputTree( vector <InputRelatedDeviceInfo*>& vDeviceList )
 {
@@ -2497,7 +2497,7 @@ VOID CDxDiagInfo::DeleteInputTree( vector <InputRelatedDeviceInfo*>& vDeviceList
 
 //-----------------------------------------------------------------------------
 // Name: DeleteFileList()
-// Desc: Удалить список файлов
+// Desc: РЈРґР°Р»РёС‚СЊ СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DeleteFileList( vector <FileNode*>& vDriverList )
 {
@@ -2515,7 +2515,7 @@ VOID CDxDiagInfo::DeleteFileList( vector <FileNode*>& vDriverList )
 
 //-----------------------------------------------------------------------------
 // Name: DestroyMusicInfo()
-// Desc: Очистить информацию о музыке
+// Desc: РћС‡РёСЃС‚РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РјСѓР·С‹РєРµ
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroyMusicInfo( MusicInfo* pMusicInfo )
 {
@@ -2538,7 +2538,7 @@ VOID CDxDiagInfo::DestroyMusicInfo( MusicInfo* pMusicInfo )
 
 //-----------------------------------------------------------------------------
 // Name: DestroyNetworkInfo()
-// Desc: Очистить информацию о сети
+// Desc: РћС‡РёСЃС‚РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЃРµС‚Рё
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroyNetworkInfo( NetInfo* pNetInfo )
 {
@@ -2590,7 +2590,7 @@ VOID CDxDiagInfo::DestroyNetworkInfo( NetInfo* pNetInfo )
 
 //-----------------------------------------------------------------------------
 // Name: DestroySoundInfo()
-// Desc: Очистить информацию о звуке
+// Desc: РћС‡РёСЃС‚РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р·РІСѓРєРµ
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroySoundInfo( vector <SoundInfo*>& vSoundInfos )
 {
@@ -2608,7 +2608,7 @@ VOID CDxDiagInfo::DestroySoundInfo( vector <SoundInfo*>& vSoundInfos )
 
 //-----------------------------------------------------------------------------
 // Name: DestroySoundCaptureInfo()
-// Desc: Очистить информацию о записанном звуке
+// Desc: РћС‡РёСЃС‚РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р·Р°РїРёСЃР°РЅРЅРѕРј Р·РІСѓРєРµ
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroySoundCaptureInfo( vector <SoundCaptureInfo*>& vSoundCaptureInfos )
 {
@@ -2626,7 +2626,7 @@ VOID CDxDiagInfo::DestroySoundCaptureInfo( vector <SoundCaptureInfo*>& vSoundCap
 
 //-----------------------------------------------------------------------------
 // Name: DestroySoundInfo()
-// Desc: Очистить всю информацию о выводе списка 
+// Desc: РћС‡РёСЃС‚РёС‚СЊ РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РІС‹РІРѕРґРµ СЃРїРёСЃРєР° 
 //-----------------------------------------------------------------------------
 VOID CDxDiagInfo::DestroyShowInfo( ShowInfo* pShowInfo )
 {
